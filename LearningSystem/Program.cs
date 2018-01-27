@@ -17,6 +17,7 @@ namespace LearningSystem
             Application.SetCompatibleTextRenderingDefault(false);
 
 
+
             if (!p.checkFolder())
             {
                 MessageBox.Show("Create app folder fail,program will exit.", "Create Folder Fail", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -65,12 +66,12 @@ namespace LearningSystem
                 }
             }
 
-            if (!p.checkDB(p.dbFile))
-            {
-                System.Threading.Thread.Sleep(1000);
-                //SplashForm.CloseSplash();
-                Environment.Exit(0);
-            }
+            //if (!p.checkDB(p.dbFile))
+            //{
+            //    System.Threading.Thread.Sleep(1000);
+            //    //SplashForm.CloseSplash();
+            //    Environment.Exit(0);
+            //}
 
             if (!File.Exists(p.iniFilePath))
                 p.createIniFile(p.iniFilePath);
@@ -81,17 +82,54 @@ namespace LearningSystem
             }
 
 
+#if DEBUG
 
-            
+            if (!p.checkDB(p.dbFile))
+            {
+                System.Threading.Thread.Sleep(1000);
+                //SplashForm.CloseSplash();
+                Environment.Exit(0);
+            }
+
+            string sql = "REPLACE INTO " + p.DBTable.d_usrlist.ToString() +
+                "(" + p.DBKeyValue.usrid.ToString() + "," + p.DBKeyValue.usrpwd.ToString() + "," + p.DBKeyValue.permission.ToString() +
+                ") VALUES ('D0805G260','D0805G260','" + p.PermissionKey.administrtor.ToString() + "')";
+
+            p.insertDB(sql);
+
+            Application.Run(new frmMain());
+            return;
+
+#else
 
 
+            bool dbinftp = false;
 
-            Application.Run(new frmMain ());
+            if (!File.Exists(p.dbFile))
+            {
+                string[] _f = FtpHelper.FTPGetFileList(p.FtpIP, p.FtpID, p.FtpPassword, p.FtpFolder);
+
+                foreach (var item in _f)
+                {
+                    if (item == "DB.sqlite")
+                    {
+                        dbinftp = true;
+                        break;
+                    }
+                }
+
+                if (dbinftp)
+                    FtpHelper.FTPDownloadFile(p.FtpIP, p.FtpID, p.FtpPassword, p.AppFolder, "DB.sqlite",  p.FtpFolder +@"\DB.sqlite");
+                
+            }
+
+#endif
+            System.Threading.Thread.Sleep(2000);
+
+            Application.Run(new frmLogin());
 
 
         }
-
-
 
 
         /// <summary>

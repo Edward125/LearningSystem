@@ -58,7 +58,12 @@ namespace LearningSystem
           //  webBrowser1.Navigate(@"D:\2018FA動線測試報告-Team2_Ver3.pptx");
           //  p.checkDB(p.dbFile);
 
-            
+            //string sql = "REPLACE INTO " + p.DBTable.d_usrlist.ToString() +
+            //    "(" + p.DBKeyValue.usrid.ToString() + "," + p.DBKeyValue.usrpwd.ToString() + "," + p.DBKeyValue.permission.ToString() +
+            //    ") VALUES ('D0805G260','D0805G260','" + p.PermissionKey.administrtor.ToString() + "')";
+
+            //p.insertDB(sql);
+
         }
 
         private void loadUI()
