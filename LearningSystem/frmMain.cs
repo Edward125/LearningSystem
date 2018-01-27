@@ -54,8 +54,11 @@ namespace LearningSystem
         {
             loadUI();
            // DllRegister();
-           this.axFramerControl1.Open(@"D:\2018FA動線測試報告-Team2_Ver3.pptx");
+          // this.axFramerControl1.Open(@"D:\2018FA動線測試報告-Team2_Ver3.pptx");
           //  webBrowser1.Navigate(@"D:\2018FA動線測試報告-Team2_Ver3.pptx");
+          //  p.checkDB(p.dbFile);
+
+            
         }
 
         private void loadUI()

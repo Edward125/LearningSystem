@@ -14,19 +14,38 @@ namespace LearningSystem
         public static string AppFolder = @".\" + Application.ProductName;
 
         public static string iniFilePath = AppFolder + @"\SysConfig.ini";
-        public static string dbFile = AppFolder + @"\ATEDB.sqlite";
+        public static string dbFile = AppFolder + @"\DB.sqlite";
         public static string dbConnectionString = "Data Source=" + dbFile;
 
 
-        public static string FtpIP = "10.60.23.42";
-        public static string FtpID = "esop";
-        public static string FtpPassword = "esop@2012";
-        public static string FtpFolder = @"ATE/Wangzhh/ATE program/ATE program/";
+        public static string FtpIP = "10.62.201.224";
+        public static string FtpID = "ate";
+        public static string FtpPassword = "Wcdate";
+        public static string FtpFolder = @"LearnSystem";
 
 
         public enum IniSection
         {
             SysConfig
+        }
+
+        public enum DBKeyValue
+        {
+            usrid,
+            usrpwd,
+            permission            
+        }
+
+        public enum DBTable
+        {
+            d_usrlist
+        }
+
+
+        public enum PermissionKey
+        {
+            administrtor,
+            guest
         }
 
         /// <summary>
@@ -90,7 +109,7 @@ namespace LearningSystem
                 {
                     SQLiteConnection.CreateFile(_dbfile);
 
-                    if (!p.createProListTable())
+                    if (!p.createUsrListTable())
                         Environment.Exit(0);                   
                     return true;
                 }
@@ -149,10 +168,12 @@ namespace LearningSystem
         /// 
         /// </summary>
         /// <returns></returns>
-        public static bool createProListTable()
+        public static bool createUsrListTable()
         {
-            string sql = @"CREATE TABLE IF NOT EXISTS d_ateprolist(
-proname varchar(255) PRIMARY KEY NOT NULL)";
+            string sql = @"CREATE TABLE IF NOT EXISTS d_usrlist(
+usrid varchar(255) PRIMARY KEY NOT NULL,
+usrpwd varchar(255),
+permission varchar(255))";
 
             if (createTable(sql))
                 return true;
@@ -166,11 +187,10 @@ proname varchar(255) PRIMARY KEY NOT NULL)";
         /// 
         /// </summary>
         /// <param name="sql"></param>
-        /// <param name="filescount"></param>
+        /// <param name="keyvalue"></param>
         /// <returns></returns>
-        public static List<string> queryDB(string sql,out int filescount)
-        {
-            filescount = 0;
+        public static List<string> queryDB(string sql,DBKeyValue dbkeyvalue)
+        {       
             List<string> files = new List<string>();
             //string sql = "SELECT * FROM d_alldepstatus";
             SQLiteConnection conn = new SQLiteConnection(p.dbConnectionString);
@@ -181,9 +201,8 @@ proname varchar(255) PRIMARY KEY NOT NULL)";
             if (re.HasRows)
             {
                 while (re.Read())
-                {
-                    filescount++;
-                    files.Add(re["proname"].ToString());
+                {                 
+                    files.Add(re[dbkeyvalue.ToString()].ToString());
                 }
             }
             conn.Close();

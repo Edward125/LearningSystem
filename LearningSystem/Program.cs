@@ -15,7 +15,7 @@ namespace LearningSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           // Application.Run(new frmMain());
+
 
             if (!p.checkFolder())
             {
@@ -75,11 +75,17 @@ namespace LearningSystem
             if (!File.Exists(p.iniFilePath))
                 p.createIniFile(p.iniFilePath);
             p.readIniValue(p.iniFilePath);
-
             {
                 System.Threading.Thread.Sleep(1000);
                 // Environment.Exit(0);
             }
+
+
+
+            
+
+
+
             Application.Run(new frmMain ());
 
 
