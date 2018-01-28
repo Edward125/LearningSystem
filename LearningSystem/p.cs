@@ -24,6 +24,16 @@ namespace LearningSystem
         public static string FtpFolder = @"LearnSystem";
 
 
+        public  class user
+        {
+            public string usrid { set; get; }
+            public string usrpwd { set; get; }
+            public   p.PermissionKey permission { set; get; }
+        }
+
+
+
+
         public enum IniSection
         {
             SysConfig

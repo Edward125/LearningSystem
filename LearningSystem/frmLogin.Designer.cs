@@ -30,13 +30,13 @@
         {
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtUsrpwd = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnSignin = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
             this.comboUsrid = new System.Windows.Forms.ComboBox();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnSignin = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtUsrpwd = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,52 +65,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login";
             // 
-            // txtUsrpwd
+            // comboUsrid
             // 
-            this.txtUsrpwd.Location = new System.Drawing.Point(92, 71);
-            this.txtUsrpwd.Name = "txtUsrpwd";
-            this.txtUsrpwd.PasswordChar = '*';
-            this.txtUsrpwd.Size = new System.Drawing.Size(157, 22);
-            this.txtUsrpwd.TabIndex = 1;
-            this.txtUsrpwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 14);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "User ID:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 14);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Password:";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Location = new System.Drawing.Point(11, 112);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(78, 31);
-            this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Log In";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // btnSignin
-            // 
-            this.btnSignin.Location = new System.Drawing.Point(106, 112);
-            this.btnSignin.Name = "btnSignin";
-            this.btnSignin.Size = new System.Drawing.Size(76, 31);
-            this.btnSignin.TabIndex = 5;
-            this.btnSignin.Text = "Sign In";
-            this.btnSignin.UseVisualStyleBackColor = true;
-            this.btnSignin.Click += new System.EventHandler(this.btnSignin_Click);
+            this.comboUsrid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboUsrid.FormattingEnabled = true;
+            this.comboUsrid.Location = new System.Drawing.Point(92, 32);
+            this.comboUsrid.Name = "comboUsrid";
+            this.comboUsrid.Size = new System.Drawing.Size(157, 22);
+            this.comboUsrid.TabIndex = 7;
+            this.comboUsrid.SelectedIndexChanged += new System.EventHandler(this.comboUsrid_SelectedIndexChanged);
             // 
             // btnReset
             // 
@@ -122,13 +85,52 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // comboUsrid
+            // btnSignin
             // 
-            this.comboUsrid.FormattingEnabled = true;
-            this.comboUsrid.Location = new System.Drawing.Point(92, 32);
-            this.comboUsrid.Name = "comboUsrid";
-            this.comboUsrid.Size = new System.Drawing.Size(157, 22);
-            this.comboUsrid.TabIndex = 7;
+            this.btnSignin.Location = new System.Drawing.Point(106, 112);
+            this.btnSignin.Name = "btnSignin";
+            this.btnSignin.Size = new System.Drawing.Size(76, 31);
+            this.btnSignin.TabIndex = 5;
+            this.btnSignin.Text = "Sign In";
+            this.btnSignin.UseVisualStyleBackColor = true;
+            this.btnSignin.Click += new System.EventHandler(this.btnSignin_Click);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(11, 112);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(78, 31);
+            this.btnLogin.TabIndex = 4;
+            this.btnLogin.Text = "Log In";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 14);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Password:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 14);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "User ID:";
+            // 
+            // txtUsrpwd
+            // 
+            this.txtUsrpwd.Location = new System.Drawing.Point(92, 71);
+            this.txtUsrpwd.Name = "txtUsrpwd";
+            this.txtUsrpwd.PasswordChar = '*';
+            this.txtUsrpwd.Size = new System.Drawing.Size(157, 22);
+            this.txtUsrpwd.TabIndex = 1;
+            this.txtUsrpwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmLogin
             // 
@@ -137,6 +139,8 @@
             this.ClientSize = new System.Drawing.Size(419, 272);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.Text = "frmLogin";
             this.Load += new System.EventHandler(this.frmLogin_Load);

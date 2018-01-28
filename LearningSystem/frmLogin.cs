@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,14 @@ namespace LearningSystem
             InitializeComponent();
             skinEngine1.SkinFile = p.AppFolder + @"\MacOS.ssk";
         }
+
+
+
+
+
+        p.user currentUser = new p.user();
+
+
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
@@ -32,6 +41,9 @@ namespace LearningSystem
                     comboUsrid.Items.Add(item);
                 }
                 comboUsrid.SelectedIndex = 0;
+                currentUser.usrid = comboUsrid.Text.Trim();
+                loadusrinfo(currentUser.usrid, ref currentUser);
+                
             }
             else
             {
@@ -52,9 +64,21 @@ namespace LearningSystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT " + p.DBKeyValue.usrpwd.ToString() + " from " + p.DBTable.d_usrlist.ToString() + " WHERE " + p.DBKeyValue.usrid.ToString() + " = '" + comboUsrid.Text.Trim() + "'";
-            List<string> pwd = p.queryDB(sql, p.DBKeyValue.usrpwd);
-            if (txtUsrpwd.Text.Trim() == pwd[0])
+            //string sql = "SELECT " + p.DBKeyValue.usrpwd.ToString() + " from " + p.DBTable.d_usrlist.ToString() + " WHERE " + p.DBKeyValue.usrid.ToString() + " = '" + comboUsrid.Text.Trim() + "'";
+            //List<string> pwd = p.queryDB(sql, p.DBKeyValue.usrpwd);
+            //if (txtUsrpwd.Text.Trim() == pwd[0])
+            //{
+            //    Form f = new frmMain();
+            //    f.Show();
+            //    this.Hide();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Invalid password,pls retry", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            //}
+
+            if (txtUsrpwd.Text.Trim() == currentUser.usrpwd)
             {
                 Form f = new frmMain();
                 f.Show();
@@ -67,11 +91,45 @@ namespace LearningSystem
             }
 
 
-            
-
-
+                     
 
         }
 
+        private void comboUsrid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboUsrid.SelectedIndex != -1)
+            {
+                currentUser.usrid = comboUsrid.Text.Trim();
+                loadusrinfo(currentUser.usrid, ref currentUser);
+            }
+        }
+
+
+
+
+        private void loadusrinfo( string usrid,ref p.user usr)
+        {
+
+            //public static Object Parse(Type enumType,string value)
+            //例如：(Colors)Enum.Parse(typeof(Colors), "Red")
+
+            usr.usrid = usrid;
+            string sql = "SELECT * FROM " + p.DBTable.d_usrlist.ToString() + " WHERE " + p.DBKeyValue.usrid.ToString() + " = '" + usrid + "'";
+            SQLiteConnection conn = new SQLiteConnection(p.dbConnectionString);
+            conn.Open();
+            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+            SQLiteDataReader re = cmd.ExecuteReader();
+
+            if (re.HasRows)
+            {
+                while (re.Read())
+                {
+                  //  files.Add(re[dbkeyvalue.ToString()].ToString());
+                    usr.usrpwd = re[p.DBKeyValue.usrpwd.ToString()].ToString().Trim();
+                    usr.permission = (p.PermissionKey)Enum.Parse(typeof(p.PermissionKey), re[p.DBKeyValue.permission.ToString()].ToString().Trim());
+                }
+            }
+            conn.Close();
+        }
     }
 }
