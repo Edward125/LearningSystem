@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
+using System.Diagnostics;
 namespace LearningSystem
 {
     static class Program
@@ -56,6 +58,19 @@ namespace LearningSystem
                 }
             }
 
+
+            if (!File.Exists( @".\dsoframer.ocx"))
+            {
+                if (!downloadDSOFramer ())
+                {
+                    System.Threading.Thread.Sleep(1000);
+                    // SplashForm.CloseSplash();
+                    Environment.Exit(0);
+                }
+            }
+
+
+
             if (!File.Exists(p.AppFolder + @"\MacOS.ssk"))
             {
                 if (!downloadSkin())
@@ -79,6 +94,14 @@ namespace LearningSystem
             {
                 System.Threading.Thread.Sleep(1000);
                 // Environment.Exit(0);
+            }
+
+
+            if (!RegControl())
+            {
+                System.Threading.Thread.Sleep(1000);
+                //SplashForm.CloseSplash();
+                Environment.Exit(0);
             }
 
 
@@ -217,6 +240,32 @@ namespace LearningSystem
         }
 
 
+        private static bool downloadDSOFramer()
+        {
+            string filePath = @".\dsoframer.ocx";
+
+            if (!File.Exists(filePath))
+            {
+                byte[] template = Properties.Resources.dsoframer;
+                FileStream stream = new FileStream(filePath, FileMode.Create);
+                try
+                {
+                    stream.Write(template, 0, template.Length);
+                    stream.Close();
+                    stream.Dispose();
+                    //  File.SetAttributes(filePath, FileAttributes.Hidden);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+
+            }
+            return true;
+        }
+
+
         /// <summary>
         /// download skin file
         /// </summary>
@@ -245,5 +294,31 @@ namespace LearningSystem
             return true;
 
         }
+
+
+         public static  bool RegControl()
+        {
+
+            try
+            {
+                Assembly thisExe = Assembly.GetExecutingAssembly();
+                //System.IO.Stream myS = thisExe.GetManifestResourceStream("NameSpaceName.dsoframer.ocx");
+
+                string oripath = @".\dsoframer.ocx";
+
+                //string sPath = “该ocx文件的+ @"/dsoframer.ocx";
+                ProcessStartInfo psi = new ProcessStartInfo("regsvr32", "/s " + oripath);
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            return true;
+      
+        }
+
+
     }
 }

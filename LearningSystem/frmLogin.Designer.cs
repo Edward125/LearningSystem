@@ -37,6 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtUsrpwd = new System.Windows.Forms.TextBox();
+            this.btnGuest = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnGuest);
             this.groupBox1.Controls.Add(this.comboUsrid);
             this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.btnSignin);
@@ -60,7 +62,7 @@
             this.groupBox1.Controls.Add(this.txtUsrpwd);
             this.groupBox1.Location = new System.Drawing.Point(63, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(283, 164);
+            this.groupBox1.Size = new System.Drawing.Size(319, 164);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login";
@@ -69,7 +71,7 @@
             // 
             this.comboUsrid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboUsrid.FormattingEnabled = true;
-            this.comboUsrid.Location = new System.Drawing.Point(92, 32);
+            this.comboUsrid.Location = new System.Drawing.Point(121, 32);
             this.comboUsrid.Name = "comboUsrid";
             this.comboUsrid.Size = new System.Drawing.Size(157, 22);
             this.comboUsrid.TabIndex = 7;
@@ -77,7 +79,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(197, 112);
+            this.btnReset.Location = new System.Drawing.Point(241, 112);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(72, 31);
             this.btnReset.TabIndex = 6;
@@ -87,9 +89,9 @@
             // 
             // btnSignin
             // 
-            this.btnSignin.Location = new System.Drawing.Point(106, 112);
+            this.btnSignin.Location = new System.Drawing.Point(83, 112);
             this.btnSignin.Name = "btnSignin";
-            this.btnSignin.Size = new System.Drawing.Size(76, 31);
+            this.btnSignin.Size = new System.Drawing.Size(70, 31);
             this.btnSignin.TabIndex = 5;
             this.btnSignin.Text = "Sign In";
             this.btnSignin.UseVisualStyleBackColor = true;
@@ -99,7 +101,7 @@
             // 
             this.btnLogin.Location = new System.Drawing.Point(11, 112);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(78, 31);
+            this.btnLogin.Size = new System.Drawing.Size(66, 31);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Log In";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -108,7 +110,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 74);
+            this.label2.Location = new System.Drawing.Point(43, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 3;
@@ -117,7 +119,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 40);
+            this.label1.Location = new System.Drawing.Point(43, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 2;
@@ -125,12 +127,22 @@
             // 
             // txtUsrpwd
             // 
-            this.txtUsrpwd.Location = new System.Drawing.Point(92, 71);
+            this.txtUsrpwd.Location = new System.Drawing.Point(121, 71);
             this.txtUsrpwd.Name = "txtUsrpwd";
             this.txtUsrpwd.PasswordChar = '*';
             this.txtUsrpwd.Size = new System.Drawing.Size(157, 22);
             this.txtUsrpwd.TabIndex = 1;
             this.txtUsrpwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnGuest
+            // 
+            this.btnGuest.Location = new System.Drawing.Point(159, 112);
+            this.btnGuest.Name = "btnGuest";
+            this.btnGuest.Size = new System.Drawing.Size(72, 31);
+            this.btnGuest.TabIndex = 8;
+            this.btnGuest.Text = "Guest";
+            this.btnGuest.UseVisualStyleBackColor = true;
+            this.btnGuest.Click += new System.EventHandler(this.btnGuest_Click);
             // 
             // frmLogin
             // 
@@ -162,5 +174,6 @@
         private System.Windows.Forms.Button btnSignin;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.ComboBox comboUsrid;
+        private System.Windows.Forms.Button btnGuest;
     }
 }

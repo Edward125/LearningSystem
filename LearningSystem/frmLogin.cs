@@ -143,5 +143,15 @@ namespace LearningSystem
                 fi.Attributes = FileAttributes.Hidden;
             }
         }
+
+        private void btnGuest_Click(object sender, EventArgs e)
+        {
+            p.CurrentUsr.usrid = "D00000000";
+            p.CurrentUsr.permission = p.PermissionKey.guest;
+            MessageBox.Show("You log in the system as GUEST", "Login in", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Form f = new frmMain();
+            f.Show();
+            this.Hide();
+        }
     }
 }
