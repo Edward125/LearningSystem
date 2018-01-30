@@ -108,9 +108,6 @@ namespace LearningSystem
 
         private void frmMain_Load(object sender, EventArgs e)
         {
- 
-
-
             loadUI();
             this.axFramerControl1.Visible = false;
            // DllRegister();
@@ -118,11 +115,39 @@ namespace LearningSystem
           //  webBrowser1.Navigate(@"D:\2018FA動線測試報告-Team2_Ver3.pptx");
           //  p.checkDB(p.dbFile);
 
-            //string sql = "REPLACE INTO " + p.DBTable.d_usrlist.ToString() +
-            //    "(" + p.DBKeyValue.usrid.ToString() + "," + p.DBKeyValue.usrpwd.ToString() + "," + p.DBKeyValue.permission.ToString() +
-            //    ") VALUES ('D0805G260','D0805G260','" + p.PermissionKey.administrtor.ToString() + "')";
+          //  string[] dl = FtpHelper.FTPGetDirectoryList(p.FtpIP, p.FtpID, p.FtpPassword, p.FtpFolder);
+            string[] dl = FtpHelper.FTPGetDetailList(p.FtpIP, p.FtpID, p.FtpPassword, p.FtpFolder, FtpHelper.FileType.Directorys);
+            
+           // string[] dl = FtpHelper.FTPGetFileList (p.FtpIP, p.FtpID, p.FtpPassword, p.FtpFolder);
 
-            //p.insertDB(sql);
+
+            if (dl != null )
+            {
+                foreach (string item in dl)
+                {
+                    TreeNode node = new TreeNode(item);
+                    treePPTList.Nodes.Add(node);
+                    treePPTList.SelectedNode = node;
+
+                    string[] childdl = FtpHelper.FTPGetDetailList(p.FtpIP, p.FtpID, p.FtpPassword, p.FtpFolder + @"\" + item, FtpHelper.FileType.Files);
+
+
+                    if (childdl != null )
+                    {
+                        foreach (string fs in childdl)
+                        {
+                            treePPTList.SelectedNode.Nodes.Add(fs);
+                        }
+                    }
+
+                }
+
+                treePPTList.ExpandAll();
+            }
+
+            grbPPT.Visible = false;
+
+
 
         }
 
@@ -165,6 +190,65 @@ namespace LearningSystem
             }
 
 
+        }
+
+        private void treePPTList_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+            string ftpparentfolder = string.Empty;
+            TreeNode selNode = treePPTList.SelectedNode;
+            if (selNode == null)
+            {
+                //防止空引用
+                return;
+            }
+            if (selNode.Parent != null)
+            {
+                //为有父亲节点的,
+                TreeNode parentNode = selNode.Parent;//得到父亲节点
+
+               // MessageBox.Show (parentNode.Text);
+                ftpparentfolder = p.FtpFolder + @"\" + parentNode.Text;
+
+                if (selNode.Nodes.Count == 0)
+                {
+                    //为没有子节点，即选中的节点为叶子节点
+                   // MessageBox.Show(selNode.Text);
+                    grbPPT.Visible = true;
+
+                    string destfile = p.PPTFolder + @"\" + selNode.Text;
+
+
+                    if (!File.Exists(destfile))
+                    {
+                        FtpHelper.FTPDownloadFile(p.FtpIP, p.FtpID, p.FtpPassword, p.PPTFolder, selNode.Text, ftpparentfolder + @"\" + selNode.Text);
+                        System.IO.FileInfo fi = new FileInfo(p.PPTFolder + @"\" + selNode.Text);
+                        fi.Attributes = FileAttributes.Hidden;
+                    }                    
+
+                    //MessageBox.Show(p.AppFolder + @"\" + selNode.Text);
+                    axFramerControl1.Open(p.PPTFolder + @"\" + selNode.Text);
+
+
+                }
+            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are u sure to exit?", "Exit or Not", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                DirectoryInfo di = new DirectoryInfo(p.PPTFolder);
+                foreach (var item in di.GetFiles ())
+                {
+                    File.Delete(item.FullName);
+                }
+
+                Environment.Exit(0);
+            }
+            if (dr == DialogResult.No)
+                e.Cancel = true;
         }
     }
 }

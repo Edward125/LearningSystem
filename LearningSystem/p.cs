@@ -11,7 +11,8 @@ namespace LearningSystem
 {
     class p
     {
-        public static string AppFolder = @".\" + Application.ProductName;
+        public static string AppFolder =Application.StartupPath + @"\" + Application.ProductName;
+        public static string PPTFolder = Application.StartupPath + @"\" + Application.ProductName + @"\PPT";
 
         public static string iniFilePath = AppFolder + @"\SysConfig.ini";
         public static string dbFile = AppFolder + @"\DB.sqlite";
@@ -22,6 +23,8 @@ namespace LearningSystem
         public static string FtpID = "ate";
         public static string FtpPassword = "Wcdate";
         public static string FtpFolder = @"LearnSystem";
+
+        public static user CurrentUsr = new user();
 
 
         public  class user
@@ -76,6 +79,23 @@ namespace LearningSystem
                     return false;
                 }
             }
+
+            if (!Directory.Exists(PPTFolder))
+            {
+                try
+                {
+                    Directory.CreateDirectory(PPTFolder);
+                    DirectoryInfo di = new DirectoryInfo(PPTFolder);
+                    di.Attributes = FileAttributes.Hidden;
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+            }
+            
+
 
             return true;
         }

@@ -9,6 +9,14 @@ namespace LearningSystem
 {
       class FtpHelper
     {
+
+
+         public  enum FileType
+          {
+              Files,
+              Directorys
+          }
+
         #region FTP获取文件列表
 
         /// <summary>
@@ -74,9 +82,6 @@ namespace LearningSystem
         }
 
 
-
-
-
         /// <summary>
         /// FTP获取文件列表
         /// </summary>
@@ -139,6 +144,176 @@ namespace LearningSystem
                 }
             }
         }
+
+
+
+
+
+        /// <summary>
+        /// FTP获取文件列表
+        /// </summary>
+        /// <param name="ftpServerIP">ftpip,eg:10.62.201.224</param>
+        /// <param name="ftpUserID">login id</param>
+        /// <param name="ftpPassword">login password</param>
+        /// <param name="folder">获取的那个文件夹</param>
+        /// <returns></returns>
+        public static string[] FTPGetDirectoryList(string ftpServerIP, string ftpUserID, string ftpPassword, string folder)
+        {
+            //响应结果
+            StringBuilder result = new StringBuilder();
+            //FTP请求
+            FtpWebRequest ftpRequest = null;
+            //FTP响应
+            WebResponse ftpResponse = null;
+            //FTP响应流
+            StreamReader ftpResponsStream = null;
+            try
+            {
+                //生成FTP请求
+                ftpRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + ftpServerIP + @"/" + @folder + "/"));
+                //设置文件传输类型
+                ftpRequest.UseBinary = true;
+                //FTP登录
+                ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                //设置FTP方法
+                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                //生成FTP响应
+                ftpResponse = ftpRequest.GetResponse();
+                //FTP响应流
+                ftpResponsStream = new StreamReader(ftpResponse.GetResponseStream());
+                string line = ftpResponsStream.ReadLine();
+                while (line != null)
+                {
+                    //result.Append(line);
+                    //result.Append("\n");
+
+                    if (line.StartsWith("drwxr-xr-x")) //dirctory //-rw-r--r-- files  
+                    {
+                        //drwxr-xr-x 1 ftp ftp              0 Jan 28 14:32 senior
+                        line = line.Substring(line.LastIndexOf(":") + 1, line.Length - line.LastIndexOf(":") - 1);
+                        line = line.Substring(3, line.Length - 3);
+                        result.Append(line);
+                        result.Append("\n");
+                        //line = ftpResponsStream.ReadLine();
+                    }
+
+
+                    line = ftpResponsStream.ReadLine();
+                }
+                //去掉结果列表中最后一个换行
+                result.Remove(result.ToString().LastIndexOf('\n'), 1);
+                //返回结果
+                return result.ToString().Split('\n');
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return (null);
+            }
+            finally
+            {
+                if (ftpResponsStream != null)
+                {
+                    ftpResponsStream.Close();
+                }
+
+                if (ftpResponse != null)
+                {
+                    ftpResponse.Close();
+                }
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// FTP获取文件列表
+        /// </summary>
+        /// <param name="ftpServerIP">ftpip,eg:10.62.201.224</param>
+        /// <param name="ftpUserID">login id</param>
+        /// <param name="ftpPassword">login password</param>
+        /// <param name="folder">获取的那个文件夹</param>
+        /// <returns></returns>
+        public static string[] FTPGetDetailList(string ftpServerIP, string ftpUserID, string ftpPassword, string folder,FileType ft)
+        {
+            //响应结果
+            StringBuilder result = new StringBuilder();
+            //FTP请求
+            FtpWebRequest ftpRequest = null;
+            //FTP响应
+            WebResponse ftpResponse = null;
+            //FTP响应流
+            StreamReader ftpResponsStream = null;
+            try
+            {
+                //生成FTP请求
+                ftpRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + ftpServerIP + @"/" + @folder + "/"));
+                //设置文件传输类型
+                ftpRequest.UseBinary = true;
+                //FTP登录
+                ftpRequest.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
+                //设置FTP方法
+                ftpRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                //生成FTP响应
+                ftpResponse = ftpRequest.GetResponse();
+                //FTP响应流
+                ftpResponsStream = new StreamReader(ftpResponse.GetResponseStream());
+                string line = ftpResponsStream.ReadLine();
+                while (line != null)
+                {
+
+
+
+
+                    if ( ft== FileType.Directorys  &&  line.StartsWith("drwxr-xr-x")) //dirctory //-rw-r--r-- files  
+                    {
+                        //drwxr-xr-x 1 ftp ftp              0 Jan 28 14:32 senior
+                        line = line.Substring(line.LastIndexOf(":") + 1, line.Length - line.LastIndexOf(":") - 1);
+                        line = line.Substring(3, line.Length - 3);
+                        result.Append(line);
+                        result.Append("\n");
+                        //line = ftpResponsStream.ReadLine();
+                    }
+
+                    if (ft == FileType.Files && line.StartsWith("-rw-r--r--")) //dirctory //-rw-r--r-- files  
+                    {
+                        //drwxr-xr-x 1 ftp ftp              0 Jan 28 14:32 senior
+                        line = line.Substring(line.LastIndexOf(":") + 1, line.Length - line.LastIndexOf(":") - 1);
+                        line = line.Substring(3, line.Length - 3);
+                        result.Append(line);
+                        result.Append("\n");
+                        //line = ftpResponsStream.ReadLine();
+                    }
+
+                    line = ftpResponsStream.ReadLine();
+                }
+                //去掉结果列表中最后一个换行
+                result.Remove(result.ToString().LastIndexOf('\n'), 1);
+                //返回结果
+                return result.ToString().Split('\n');
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return (null);
+            }
+            finally
+            {
+                if (ftpResponsStream != null)
+                {
+                    ftpResponsStream.Close();
+                }
+
+                if (ftpResponse != null)
+                {
+                    ftpResponse.Close();
+                }
+            }
+        }
+
+
+
         #endregion
 
         #region FTP下载文件

@@ -143,6 +143,7 @@
             this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.Text = "frmLogin";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

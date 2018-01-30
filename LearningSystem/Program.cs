@@ -120,11 +120,17 @@ namespace LearningSystem
 
                 if (dbinftp)
                     FtpHelper.FTPDownloadFile(p.FtpIP, p.FtpID, p.FtpPassword, p.AppFolder, "DB.sqlite",  p.FtpFolder +@"\DB.sqlite");
-                
+
+                string dblocal = p.AppFolder + @"\" + "DB.sqlite";
+                if (File.Exists(dblocal))
+                {
+                    FileInfo fi = new FileInfo(dblocal);
+                    fi.Attributes = FileAttributes.Hidden;
+                }
             }
 
 #endif
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
 
             Application.Run(new frmLogin());
 

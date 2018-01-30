@@ -71,17 +71,18 @@
             this.groupBox1.Controls.Add(this.treePPTList);
             this.groupBox1.Location = new System.Drawing.Point(12, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 518);
+            this.groupBox1.Size = new System.Drawing.Size(200, 524);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "課程列表";
             // 
             // treePPTList
             // 
             this.treePPTList.Location = new System.Drawing.Point(6, 20);
             this.treePPTList.Name = "treePPTList";
-            this.treePPTList.Size = new System.Drawing.Size(188, 492);
+            this.treePPTList.Size = new System.Drawing.Size(188, 498);
             this.treePPTList.TabIndex = 0;
+            this.treePPTList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePPTList_AfterSelect);
             // 
             // frmMain
             // 
@@ -90,8 +91,10 @@
             this.ClientSize = new System.Drawing.Size(1129, 570);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grbPPT);
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.grbPPT.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();

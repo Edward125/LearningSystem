@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -22,7 +23,7 @@ namespace LearningSystem
 
 
 
-        p.user currentUser = new p.user();
+       
 
 
 
@@ -41,8 +42,8 @@ namespace LearningSystem
                     comboUsrid.Items.Add(item);
                 }
                 comboUsrid.SelectedIndex = 0;
-                currentUser.usrid = comboUsrid.Text.Trim();
-                loadusrinfo(currentUser.usrid, ref currentUser);
+              p.CurrentUsr .usrid = comboUsrid.Text.Trim();
+              loadusrinfo(p.CurrentUsr.usrid, ref  p.CurrentUsr );
                 
             }
             else
@@ -78,7 +79,7 @@ namespace LearningSystem
 
             //}
 
-            if (txtUsrpwd.Text.Trim() == currentUser.usrpwd)
+            if (txtUsrpwd.Text.Trim() == p.CurrentUsr.usrpwd)
             {
                 Form f = new frmMain();
                 f.Show();
@@ -87,7 +88,8 @@ namespace LearningSystem
             else
             {
                 MessageBox.Show("Invalid password,pls retry", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                txtUsrpwd.SelectAll();
+                txtUsrpwd.Focus();
             }
 
 
@@ -99,8 +101,8 @@ namespace LearningSystem
         {
             if (comboUsrid.SelectedIndex != -1)
             {
-                currentUser.usrid = comboUsrid.Text.Trim();
-                loadusrinfo(currentUser.usrid, ref currentUser);
+                p.CurrentUsr.usrid = comboUsrid.Text.Trim();
+                loadusrinfo(p.CurrentUsr.usrid, ref p.CurrentUsr);
             }
         }
 
@@ -130,6 +132,16 @@ namespace LearningSystem
                 }
             }
             conn.Close();
+        }
+
+        private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string dblocal = p.AppFolder + @"\" + "DB.sqlite";
+            if (File.Exists(dblocal))
+            {
+                FileInfo fi = new FileInfo(dblocal);
+                fi.Attributes = FileAttributes.Hidden;
+            }
         }
     }
 }
