@@ -5,10 +5,21 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 namespace LearningSystem
 {
     static class Program
     {
+
+        
+
+    //导入判断网络是否连接的 .dll  
+      [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]  
+     //判断网络状况的方法,返回值true为连接，false为未连接  
+      public extern static bool InternetGetConnectedState(out int conState, int reder); 
+
+
+
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -17,6 +28,24 @@ namespace LearningSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            int n = 0;  
+            if (InternetGetConnectedState(out n, 0))  
+            {  
+             //  MessageBox.Show("yes");  
+            }  
+           else 
+            {
+                MessageBox.Show("Your pc may not connect network,pls check and retry", "Network Invaild", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                System.Threading.Thread.Sleep(1000);
+                // SplashForm.CloseSplash();
+                Environment.Exit(0);
+            }  
+
+
+   
+
+
 
             if (!p.checkFolder())
             {
@@ -319,7 +348,7 @@ namespace LearningSystem
                     if (!File.Exists(destpath64))
                     {
                         File.Copy(oripath, destpath64, true);
-                        ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
+                        ProcessStartInfo psi = new ProcessStartInfo("regsvr32", "/s " + destpath64 );
                         //ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
                         Process.Start(psi);
                     }
@@ -329,7 +358,7 @@ namespace LearningSystem
                     if (!File.Exists(destpath32))
                     {
                         File.Copy(oripath, destpath32, true);
-                        ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
+                        ProcessStartInfo psi = new ProcessStartInfo("regsvr32", "/s " + destpath32);
                         //ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
                         Process.Start(psi);
                     }
