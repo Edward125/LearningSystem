@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGuest = new System.Windows.Forms.Button();
             this.comboUsrid = new System.Windows.Forms.ComboBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSignin = new System.Windows.Forms.Button();
@@ -37,7 +39,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtUsrpwd = new System.Windows.Forms.TextBox();
-            this.btnGuest = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +67,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login";
+            // 
+            // btnGuest
+            // 
+            this.btnGuest.Location = new System.Drawing.Point(159, 112);
+            this.btnGuest.Name = "btnGuest";
+            this.btnGuest.Size = new System.Drawing.Size(72, 31);
+            this.btnGuest.TabIndex = 8;
+            this.btnGuest.Text = "Guest";
+            this.btnGuest.UseVisualStyleBackColor = true;
+            this.btnGuest.Click += new System.EventHandler(this.btnGuest_Click);
             // 
             // comboUsrid
             // 
@@ -134,16 +145,6 @@
             this.txtUsrpwd.TabIndex = 1;
             this.txtUsrpwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // btnGuest
-            // 
-            this.btnGuest.Location = new System.Drawing.Point(159, 112);
-            this.btnGuest.Name = "btnGuest";
-            this.btnGuest.Size = new System.Drawing.Size(72, 31);
-            this.btnGuest.TabIndex = 8;
-            this.btnGuest.Text = "Guest";
-            this.btnGuest.UseVisualStyleBackColor = true;
-            this.btnGuest.Click += new System.EventHandler(this.btnGuest_Click);
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -152,6 +153,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.Text = "frmLogin";

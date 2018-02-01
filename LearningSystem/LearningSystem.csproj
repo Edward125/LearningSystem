@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>b1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="IrisSkin4, Version=2006.3.22.45, Culture=neutral, PublicKeyToken=127be25a6db25e07, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -138,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dsoframer.ocx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="b1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

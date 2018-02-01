@@ -18,8 +18,6 @@ namespace LearningSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
-
             if (!p.checkFolder())
             {
                 MessageBox.Show("Create app folder fail,program will exit.", "Create Folder Fail", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -153,8 +151,9 @@ namespace LearningSystem
             }
 
 #endif
-            System.Threading.Thread.Sleep(1000);
 
+
+            System.Threading.Thread.Sleep(1000);
             Application.Run(new frmLogin());
 
 
@@ -307,8 +306,37 @@ namespace LearningSystem
                 string oripath = @".\dsoframer.ocx";
 
                 //string sPath = “该ocx文件的+ @"/dsoframer.ocx";
-                ProcessStartInfo psi = new ProcessStartInfo("regsvr32", "/s " + oripath);
-                Process.Start(psi);
+                string destpath32 = @"C:\Windows\System32\dsoframer.ocx";
+                string destpath64 = @"C:\Windows\SysWOW64\dsoframer.ocx";
+
+
+
+
+
+                if (System.Environment.Is64BitOperatingSystem)
+                {
+
+                    if (!File.Exists(destpath64))
+                    {
+                        File.Copy(oripath, destpath64, true);
+                        ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
+                        //ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
+                        Process.Start(psi);
+                    }
+                }
+                else
+                {
+                    if (!File.Exists(destpath32))
+                    {
+                        File.Copy(oripath, destpath32, true);
+                        ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
+                        //ProcessStartInfo psi = new ProcessStartInfo("regsvr32", " " + oripath);
+                        Process.Start(psi);
+                    }
+                    
+                }
+
+               
             }
             catch (Exception ex)
             {

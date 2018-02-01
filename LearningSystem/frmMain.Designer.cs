@@ -31,14 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine();
             this.grbPPT = new System.Windows.Forms.GroupBox();
+            this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treePPTList = new System.Windows.Forms.TreeView();
-            this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
             this.txtInfo = new System.Windows.Forms.TextBox();
-            this.btnUpload = new System.Windows.Forms.Button();
             this.grbPPT.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // skinEngine1
@@ -59,6 +58,15 @@
             this.grbPPT.TabIndex = 0;
             this.grbPPT.TabStop = false;
             // 
+            // axFramerControl1
+            // 
+            this.axFramerControl1.Enabled = true;
+            this.axFramerControl1.Location = new System.Drawing.Point(6, 20);
+            this.axFramerControl1.Name = "axFramerControl1";
+            this.axFramerControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFramerControl1.OcxState")));
+            this.axFramerControl1.Size = new System.Drawing.Size(872, 498);
+            this.axFramerControl1.TabIndex = 0;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.treePPTList);
@@ -77,52 +85,33 @@
             this.treePPTList.TabIndex = 0;
             this.treePPTList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treePPTList_AfterSelect);
             // 
-            // axFramerControl1
-            // 
-            this.axFramerControl1.Enabled = true;
-            this.axFramerControl1.Location = new System.Drawing.Point(6, 20);
-            this.axFramerControl1.Name = "axFramerControl1";
-            this.axFramerControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFramerControl1.OcxState")));
-            this.axFramerControl1.Size = new System.Drawing.Size(872, 498);
-            this.axFramerControl1.TabIndex = 0;
-            // 
             // txtInfo
             // 
             this.txtInfo.BackColor = System.Drawing.Color.Black;
             this.txtInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.txtInfo.Location = new System.Drawing.Point(18, 7);
             this.txtInfo.Name = "txtInfo";
-            this.txtInfo.Size = new System.Drawing.Size(979, 21);
+            this.txtInfo.Size = new System.Drawing.Size(1094, 21);
             this.txtInfo.TabIndex = 2;
             this.txtInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnUpload
-            // 
-            this.btnUpload.Location = new System.Drawing.Point(1003, 6);
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(109, 23);
-            this.btnUpload.TabIndex = 3;
-            this.btnUpload.Text = "Upload";
-            this.btnUpload.UseVisualStyleBackColor = true;
-            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 570);
-            this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grbPPT);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.grbPPT.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,7 +125,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TreeView treePPTList;
         private System.Windows.Forms.TextBox txtInfo;
-        private System.Windows.Forms.Button btnUpload;
     }
 }
 
