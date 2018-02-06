@@ -238,7 +238,7 @@ namespace LearningSystem
 
                     //MessageBox.Show(p.AppFolder + @"\" + selNode.Text);
 
-                    startTime =  DateTime.Now.AddSeconds(-1);
+                   // startTime =  DateTime.Now.AddSeconds(-1);
                     axFramerControl1.Open(p.PPTFolder + @"\" + selNode.Text);
                     //grbPPT.Focus();
                     //axFramerControl1.Focus();
@@ -262,18 +262,19 @@ namespace LearningSystem
                     File.Delete(item.FullName);
                 }
 
+                axFramerControl1.Dispose();
                 //KillPowerPoint();
-               endTime =  DateTime.Now.AddSeconds(1);
+               //endTime =  DateTime.Now.AddSeconds(1);
 
 
-                foreach (System.Diagnostics.Process theProc in System.Diagnostics.Process.GetProcessesByName("EXCEL"))
-                {
-                    if (theProc.StartTime.CompareTo(startTime) > 0 && theProc.StartTime.CompareTo(endTime) < 0)
-                    {
-                        theProc.Kill();
-                        break;
-                    }
-                }
+                //foreach (System.Diagnostics.Process theProc in System.Diagnostics.Process.GetProcessesByName("POWERPNT"))
+                //{
+                //    if (theProc.StartTime.CompareTo(startTime) > 0 && theProc.StartTime.CompareTo(endTime) < 0)
+                //    {
+                //        theProc.Kill();
+                //        break;
+                //    }
+                //}
 
 
 
