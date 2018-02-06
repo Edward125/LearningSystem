@@ -30,14 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine();
-            this.grbPPT = new System.Windows.Forms.GroupBox();
-            this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treePPTList = new System.Windows.Forms.TreeView();
             this.txtInfo = new System.Windows.Forms.TextBox();
-            this.grbPPT.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).BeginInit();
+            this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // skinEngine1
@@ -48,24 +46,6 @@
             this.skinEngine1.InactiveCaptionColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.skinEngine1.SerialNumber = "";
             this.skinEngine1.SkinFile = null;
-            // 
-            // grbPPT
-            // 
-            this.grbPPT.Controls.Add(this.axFramerControl1);
-            this.grbPPT.Location = new System.Drawing.Point(223, 34);
-            this.grbPPT.Name = "grbPPT";
-            this.grbPPT.Size = new System.Drawing.Size(889, 524);
-            this.grbPPT.TabIndex = 0;
-            this.grbPPT.TabStop = false;
-            // 
-            // axFramerControl1
-            // 
-            this.axFramerControl1.Enabled = true;
-            this.axFramerControl1.Location = new System.Drawing.Point(6, 20);
-            this.axFramerControl1.Name = "axFramerControl1";
-            this.axFramerControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFramerControl1.OcxState")));
-            this.axFramerControl1.Size = new System.Drawing.Size(872, 498);
-            this.axFramerControl1.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -95,23 +75,30 @@
             this.txtInfo.TabIndex = 2;
             this.txtInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // axFramerControl1
+            // 
+            this.axFramerControl1.Enabled = true;
+            this.axFramerControl1.Location = new System.Drawing.Point(218, 45);
+            this.axFramerControl1.Name = "axFramerControl1";
+            this.axFramerControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFramerControl1.OcxState")));
+            this.axFramerControl1.Size = new System.Drawing.Size(899, 513);
+            this.axFramerControl1.TabIndex = 3;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 570);
+            this.Controls.Add(this.axFramerControl1);
             this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.grbPPT);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.grbPPT.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,11 +107,10 @@
         #endregion
 
         private Sunisoft.IrisSkin.SkinEngine skinEngine1;
-        private System.Windows.Forms.GroupBox grbPPT;
-        private AxDSOFramer.AxFramerControl axFramerControl1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TreeView treePPTList;
         private System.Windows.Forms.TextBox txtInfo;
+        private AxDSOFramer.AxFramerControl axFramerControl1;
     }
 }
 

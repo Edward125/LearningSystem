@@ -16,14 +16,8 @@ namespace LearningSystem
         public frmLogin()
         {
             InitializeComponent();
-            skinEngine1.SkinFile = p.AppFolder + @"\MacOS.ssk";
-        }
-
-
-
-
-
-       
+            //skinEngine1.SkinFile = p.AppFolder + @"\MacOS.ssk";
+        }      
 
 
 
@@ -152,6 +146,26 @@ namespace LearningSystem
             Form f = new frmMain();
             f.Show();
             this.Hide();
+        }
+
+        private void txtUsrpwd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           // if (e.KeyChar.ToString() == SubFunction.Chr(13)) //Enter
+            if (e.KeyChar.ToString () == Edward.Other.Chr (13))
+            {
+                if (txtUsrpwd.Text.Trim() == p.CurrentUsr.usrpwd)
+                {
+                    Form f = new frmMain();
+                    f.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid password,pls retry", "Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtUsrpwd.SelectAll();
+                    txtUsrpwd.Focus();
+                }
+            }
         }
     }
 }

@@ -144,6 +144,7 @@
             this.txtUsrpwd.Size = new System.Drawing.Size(157, 22);
             this.txtUsrpwd.TabIndex = 1;
             this.txtUsrpwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtUsrpwd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsrpwd_KeyPress);
             // 
             // frmLogin
             // 

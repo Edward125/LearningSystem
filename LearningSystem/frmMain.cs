@@ -38,6 +38,9 @@ namespace LearningSystem
         [DllImport("dsoframer.ocx")]
         public static extern int DllUnregisterServer();//取消注册时用
 
+        DateTime startTime = new DateTime();
+         DateTime endTime = new DateTime();
+
         #endregion
 
         #region 窗体放大缩小
@@ -103,7 +106,7 @@ namespace LearningSystem
         public frmMain()
         {
             InitializeComponent();
-            skinEngine1.SkinFile = p.AppFolder + @"\MacOS.ssk";
+           // skinEngine1.SkinFile = p.AppFolder + @"\MacOS.ssk";
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -221,7 +224,7 @@ namespace LearningSystem
                 {
                     //为没有子节点，即选中的节点为叶子节点
                    // MessageBox.Show(selNode.Text);
-                    grbPPT.Visible = true;
+                    //grbPPT.Visible = true;
 
                     string destfile = p.PPTFolder + @"\" + selNode.Text;
 
@@ -234,6 +237,8 @@ namespace LearningSystem
                     }                   
 
                     //MessageBox.Show(p.AppFolder + @"\" + selNode.Text);
+
+                    startTime =  DateTime.Now.AddSeconds(-1);
                     axFramerControl1.Open(p.PPTFolder + @"\" + selNode.Text);
                     //grbPPT.Focus();
                     //axFramerControl1.Focus();
@@ -256,6 +261,21 @@ namespace LearningSystem
                 {
                     File.Delete(item.FullName);
                 }
+
+                //KillPowerPoint();
+               endTime =  DateTime.Now.AddSeconds(1);
+
+
+                foreach (System.Diagnostics.Process theProc in System.Diagnostics.Process.GetProcessesByName("EXCEL"))
+                {
+                    if (theProc.StartTime.CompareTo(startTime) > 0 && theProc.StartTime.CompareTo(endTime) < 0)
+                    {
+                        theProc.Kill();
+                        break;
+                    }
+                }
+
+
 
                 Environment.Exit(0);
             }
@@ -300,6 +320,17 @@ namespace LearningSystem
 
             //}
       
+
+
         }
+
+        #region KillExcel
+        private void KillPowerPoint()
+        {
+            System.Diagnostics.Process[] excelProcess = System.Diagnostics.Process.GetProcessesByName("POWERPNT");
+            foreach (System.Diagnostics.Process p in excelProcess)
+                p.Kill();
+        }
+        #endregion
     }
 }
