@@ -240,6 +240,7 @@ namespace LearningSystem
 
                    // startTime =  DateTime.Now.AddSeconds(-1);
                     axFramerControl1.Open(p.PPTFolder + @"\" + selNode.Text);
+                   
                     //grbPPT.Focus();
                     //axFramerControl1.Focus();
                     //SendMessage(grbPPT.Handle , WM_KEYDOWN, VK_F5, 0);
@@ -256,13 +257,15 @@ namespace LearningSystem
             DialogResult dr = MessageBox.Show("Are u sure to exit?", "Exit or Not", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
+                axFramerControl1.Close();
+                axFramerControl1.Dispose();
                 DirectoryInfo di = new DirectoryInfo(p.PPTFolder);
                 foreach (var item in di.GetFiles ())
                 {
                     File.Delete(item.FullName);
                 }
 
-                axFramerControl1.Dispose();
+               
                 //KillPowerPoint();
                //endTime =  DateTime.Now.AddSeconds(1);
 
